@@ -36,10 +36,12 @@ public:
     bool modifier();
     bool supprimer(int id);
     QSqlQueryModel* afficher();
+    bool idExists(int id);
 
     //metier
     QSqlQueryModel* chercher(QString column, QString text);
     QSqlQueryModel* tri(QString column, QString choix);
+    QMap<QString, int> statistiquesParMarque();
 
 private:
     int id_vehicule;

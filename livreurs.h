@@ -3,7 +3,7 @@
 #include <QString>
 #include <QDate>
 #include <QSqlQueryModel>
-
+#include <QList>
 class livreurs
 {
 public:
@@ -57,6 +57,9 @@ public:
 
   int chercherIdLivreurDapreFullName(QString livreur_FullName);
   bool idExists(int id);
+  QList<int> ListIdLivreur();
+
+  QString ChercherEmailById(int id_livreur);
 
 private:
   int id_livreur;

@@ -54,13 +54,14 @@ bool vehicule::modifier()
     QSqlQuery query;
 
     query.prepare("UPDATE VEHICULES SET Marque = :Marque, Modele = :Modele, Annee = :Annee, "
-                  "Matricule = :Matricule WHERE ID_Vehicule = :ID_Vehicule");
+                  "Matricule = :Matricule ,ID_LIVREUR=:ID_LIVREUR WHERE ID_Vehicule = :ID_Vehicule");
 
     query.bindValue(":ID_Vehicule", id_vehicule);
     query.bindValue(":Marque", marque);
     query.bindValue(":Modele", modele);
     query.bindValue(":Annee", annee);
     query.bindValue(":Matricule", matricule);
+    query.bindValue(":ID_LIVREUR", id_livreur);
 
     return query.exec();
 }
@@ -93,4 +94,36 @@ QSqlQueryModel* vehicule::tri(QString column, QString choix)
     QSqlQueryModel* model = new QSqlQueryModel();
     model->setQuery("SELECT * FROM VEHICULES ORDER BY " + column + " " + choix);
     return model;
+}
+
+
+bool vehicule::idExists(int id)
+{
+QSqlQuery query;
+query.prepare("SELECT COUNT(*) FROM VEHICULES WHERE ID_VEHICULE = :id");
+query.bindValue(":id", id);
+
+if (query.exec() && query.next()) {
+    int count = query.value(0).toInt();
+    return count > 0;
+}
+
+return false;
+}
+
+QMap<QString, int> vehicule::statistiquesParMarque() {
+    QMap<QString, int> MarqueStats;
+
+    QSqlQuery query;
+    query.prepare("SELECT MARQUE, COUNT(*) as count FROM VEHICULES GROUP BY MARQUE");
+
+    if (query.exec()) {
+        while (query.next()) {
+            QString Marque = query.value(0).toString();
+            int count = query.value(1).toInt();
+            MarqueStats[Marque] = count;
+        }
+    }
+
+    return MarqueStats;
 }

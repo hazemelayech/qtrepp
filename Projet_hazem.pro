@@ -1,4 +1,4 @@
-QT       += core gui sql printsupport charts
+QT       += core gui sql printsupport charts network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,13 +20,15 @@ SOURCES += \
     livreurs.cpp \
     main.cpp \
     mainwindow.cpp \
-    vehicules.cpp
+    vehicules.cpp  \
+    email.cpp
 
 HEADERS += \
     connexion.h \
     livreurs.h \
     mainwindow.h \
-    vehicules.h
+    vehicules.h \
+    email.h
 
 FORMS += \
     mainwindow.ui

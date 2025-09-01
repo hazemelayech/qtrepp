@@ -37,6 +37,34 @@ private slots:
 
     void on_bt_stat_livreur_clicked();
 
+    void remplir_comboBox_Livreur();
+
+
+    void on_bt_ajouter_vehicule_clicked();
+
+    void on_bt_modifier_vehicule_clicked();
+
+
+    void on_tableView_vehicule_clicked(const QModelIndex &index);
+
+    void on_bt_supprimer_vehicule_clicked();
+
+    void on_bt_trier_vehicule_clicked();
+
+    void on_lineEdit_chercher_vehicule_textChanged(const QString &text);
+
+    void on_bt_pdf_vehicule_clicked();
+
+    void on_bt_stat_vehicule_clicked();
+
+    void on_bt_historique_clicked();
+
+    void addToHistory(const QString &action, const QString &serviceName);
+
+    void on_bt_tableau_2_clicked();
+
+    void on_bt_tableau_clicked();
+
 private:
     Ui::MainWindow *ui;
 vehicule v;

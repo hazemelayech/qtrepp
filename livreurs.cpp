@@ -183,3 +183,36 @@ if (query.exec() && query.next()) {
 return false;
 }
 
+QList<int> livreurs::ListIdLivreur(){
+QList<int> Liste;
+
+QSqlQuery query;
+query.prepare("SELECT ID_LIVREUR FROM LIVREURS ");
+if(query.exec())
+{
+    while(query.next())
+    {
+        Liste.append(query.value(0).toInt());
+    }
+}
+return Liste;
+
+}
+
+
+QString livreurs::ChercherEmailById(int id_livreur)
+{
+    QString email = "";
+    QSqlQuery query;
+
+    // Specify the table name in the SELECT statement
+    query.prepare("SELECT EMAIL FROM LIVREURS WHERE id_livreur = :id_livreur");
+    query.bindValue(":id_livreur", id_livreur);
+
+    if (query.exec() && query.next())
+    {
+        email = query.value(0).toString();
+    }
+
+    return email;
+}
